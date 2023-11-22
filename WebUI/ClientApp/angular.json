@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "WebUI"
+  "defaultProject": "WebUI",
+  "cli": {
+    "analytics": "9ad107ee-9fee-4169-b899-aeba766d7759"
+  }
 }

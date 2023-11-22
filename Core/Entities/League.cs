@@ -14,7 +14,6 @@ namespace Domain.Entities
         [Required]
         public string LeagueName { get; set; }
 
-
         [Required]
         public int LeagueFirstPlace { get; set; }
 

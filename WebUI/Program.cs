@@ -1,9 +1,14 @@
+using Domain.Interfaces;
 using Infrastructure.Context;
+using Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<DapperContext>();
+builder.Services.AddTransient<ILeagueRepository, LeagueRepository>();
+builder.Services.AddTransient<IMatchRepository, MatchRepository>();
+builder.Services.AddTransient<ITeamRepository, TeamRepository>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -20,9 +25,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller}/{action=Index}/{id?}");
+app.MapControllers();
 
 app.MapFallbackToFile("index.html"); ;
 
