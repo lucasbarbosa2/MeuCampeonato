@@ -17,14 +17,21 @@ namespace Application.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<LeaguesDTO>> Get(int userId)
+        public async Task<IEnumerable<LeaguesDTO>> GetUserLeagues(int userId)
         {
-            var leagues = await _leagueRepository.Get(userId);
+            var leagues = await _leagueRepository.GetUserLeagues(userId);
 
             var leaguesDTO = _mapper.Map<IEnumerable<League>, IEnumerable<LeaguesDTO>>(leagues);
 
             return leaguesDTO;
 
+        }
+
+        public async Task<League> Get(int leagueId)
+        {
+            var league = await _leagueRepository.Get(leagueId);
+
+            return league;
         }
     }
 }

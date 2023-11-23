@@ -1,8 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Application.DTO
+﻿namespace Application.DTO
 {
     public class MatchesDTO
+    {
+        public string LeagueName { get; set; }
+
+        public int LeagueId { get; set; }
+
+        public IEnumerable<MatchDTO> Matches { get; set; }
+    }
+
+    public class MatchDTO
     {
         public int Id { get; set; }
 
@@ -25,7 +32,5 @@ namespace Application.DTO
         public bool IsFinal { get; set; }
 
         public bool IsThird { get; set; }
-
-        public int LeagueId { get; set; }
     }
 }

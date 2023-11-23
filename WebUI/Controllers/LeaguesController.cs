@@ -14,11 +14,11 @@ namespace WebUI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int userId = 1)
+        public async Task<IActionResult> GetUserLeagues(int userId = 1)
         {
             try
             {
-                var leagues = await _leagueService.Get(userId);
+                var leagues = await _leagueService.GetUserLeagues(userId);
                 return Ok(leagues);
             }
             catch (Exception ex)

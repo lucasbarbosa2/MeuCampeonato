@@ -7,31 +7,30 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './match.component.html'
 })
 export class MatchComponent {
-  public matches: Match[] = [];
-  public teams: Team[] = [];
+  public matches: Matches = {} as Matches;
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private router: ActivatedRoute) {
-    http.get<Match[]>(baseUrl + 'api/matches?leagueId=' + this.router.snapshot.queryParams['leagueId']).subscribe(result => {
+    http.get<Matches>(baseUrl + 'api/matches?leagueId=' + this.router.snapshot.queryParams['leagueId']).subscribe(result => {
       this.matches = result;
     }, error => console.error(error));
-    http.get<Team[]>(baseUrl + 'api/teams?leagueId=' + this.router.snapshot.queryParams['leagueId']).subscribe(result => {
-      this.teams = result;
-      this.matches = this.matches.map(e => {
-        return {
-          id: e.id,
-          teamOne: e.teamOne,
-          teamTwo: e.teamTwo,
-          teamOneScore: e.teamOneScore,
-          teamTwoScore: e.teamTwoScore,
-          teamOneName: this.teams.find(i => i.id === e.teamOne)?.name ?? '',
-          teamTwoName: this.teams.find(f => f.id === e.teamTwo)?.name ?? '',
-        }
-      })
-    }, error => console.error(error));
+  }
 
-    
+  get quarterMatches() {
+    return this.matches?.matches?.filter(f => f.isQuarter);
+  }
+  get semiMatches() {
+    return this.matches?.matches?.filter(f => f.isSemi);
+  }
+  get finalMatch() {
+    return this.matches?.matches?.filter(f => f.isFinal);
+  }
+  get thirdMatch() {
+    return this.matches?.matches?.filter(f => f.isThird);
   }
 }
-
+interface Matches {
+  leagueName: string;
+  matches: Match[]
+}
 interface Match {
   id: number;
   teamOne: number;
@@ -40,9 +39,8 @@ interface Match {
   teamTwoScore: number;
   teamOneName: string;
   teamTwoName: string;
-}
-
-interface Team {
-  id: number;
-  name: string;
+  isQuarter: boolean;
+  isSemi: boolean;
+  isFinal: boolean;
+  isThird: boolean;
 }

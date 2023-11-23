@@ -4,6 +4,6 @@ namespace Application.Interfaces
 {
     public interface IMatchService
     {
-        public Task<IEnumerable<MatchesDTO>> Get(int leagueId);
+        public Task<MatchesDTO> Get(int leagueId);
     }
 }

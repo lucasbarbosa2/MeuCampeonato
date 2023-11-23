@@ -10,27 +10,38 @@ namespace Application.Services
     {
         private readonly IMatchRepository _matchRepository;
         private readonly ITeamService _teamService;
+        private readonly ILeagueService _leagueService;
         private readonly IMapper _mapper;
         
-        public MatchService(IMatchRepository matchRepository, IMapper mapper, ITeamService teamService)
+        public MatchService(IMatchRepository matchRepository, IMapper mapper, ITeamService teamService, ILeagueService leagueService)
         {
             _matchRepository = matchRepository;
             _mapper = mapper;
             _teamService = teamService;
+            _leagueService = leagueService;
         }
 
-        public async Task<IEnumerable<MatchesDTO>> Get(int leagueId)
+        public async Task<MatchesDTO> Get(int leagueId)
         {
             var matches = await _matchRepository.Get(leagueId);
 
-            var matchesDTO = _mapper.Map<IEnumerable<Match>,IEnumerable<MatchesDTO>>(matches);
+            var matchDTO = _mapper.Map<IEnumerable<Match>, IEnumerable<MatchDTO>>(matches);
 
             var teamsDTO = await _teamService.Get(leagueId);
-            
-            foreach(var matchDTO in matchesDTO)
+
+            var league = await _leagueService.Get(leagueId);
+
+            var matchesDTO = new MatchesDTO
             {
-                matchDTO.TeamOneName = teamsDTO.FirstOrDefault(f => f.Id == matchDTO.TeamOne)?.Name;
-                matchDTO.TeamTwoName = teamsDTO.FirstOrDefault(f => f.Id == matchDTO.TeamTwo)?.Name;
+                LeagueName = league.Name,
+                LeagueId = leagueId,
+                Matches = matchDTO
+            };
+            
+            foreach(var match in matchDTO)
+            {
+                match.TeamOneName = teamsDTO.FirstOrDefault(f => f.Id == match.TeamOne)?.Name;
+                match.TeamTwoName = teamsDTO.FirstOrDefault(f => f.Id == match.TeamTwo)?.Name;
             }
 
             return matchesDTO;

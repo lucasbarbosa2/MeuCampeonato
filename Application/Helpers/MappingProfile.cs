@@ -9,7 +9,7 @@ namespace Application.Helpers
         public MappingProfile() 
         {
             CreateMap<League, LeaguesDTO>().ReverseMap();
-            CreateMap<Match, MatchesDTO>().ReverseMap();
+            CreateMap<Match, MatchDTO>().ReverseMap();
             CreateMap<Team, TeamsDTO>().ReverseMap();            
         }
     }

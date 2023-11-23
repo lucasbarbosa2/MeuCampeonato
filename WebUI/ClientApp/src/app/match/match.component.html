@@ -1,15 +1,51 @@
-<h1 id="tableLabel">League</h1>
+<h1 id="tableLabel">League {{ matches.leagueName }} </h1>
 
 <p *ngIf="!matches"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="matches">
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="quarterMatches">
   <thead>
     <tr>
-      <th>Match</th>
+      <th>Semi</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let match of matches">
+    <tr *ngFor="let match of quarterMatches">
+      <td>{{ match.teamOneName }} {{ match.teamOneScore }} x {{ match.teamTwoScore }} {{ match.teamTwoName }}</td>
+    </tr>
+  </tbody>
+</table>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="semiMatches">
+  <thead>
+    <tr>
+      <th>Quartas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let match of semiMatches">
+      <td>{{ match.teamOneName }} {{ match.teamOneScore }} x {{ match.teamTwoScore }} {{ match.teamTwoName }}</td>
+    </tr>
+  </tbody>
+</table>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="thirdMatch">
+  <thead>
+    <tr>
+      <th>Terceiro</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let match of thirdMatch">
+      <td>{{ match.teamOneName }} {{ match.teamOneScore }} x {{ match.teamTwoScore }} {{ match.teamTwoName }}</td>
+    </tr>
+  </tbody>
+</table>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="finalMatch">
+  <thead>
+    <tr>
+      <th>Final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let match of finalMatch">
       <td>{{ match.teamOneName }} {{ match.teamOneScore }} x {{ match.teamTwoScore }} {{ match.teamTwoName }}</td>
     </tr>
   </tbody>
