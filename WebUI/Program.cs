@@ -1,3 +1,6 @@
+using Application.Helpers;
+using Application.Interfaces;
+using Application.Services;
 using Domain.Interfaces;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
@@ -9,7 +12,11 @@ builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddTransient<ILeagueRepository, LeagueRepository>();
 builder.Services.AddTransient<IMatchRepository, MatchRepository>();
 builder.Services.AddTransient<ITeamRepository, TeamRepository>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<ILeagueService, LeagueService>();
+builder.Services.AddTransient<IMatchService, MatchService>();
+builder.Services.AddTransient<ITeamService, TeamService>();
+builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

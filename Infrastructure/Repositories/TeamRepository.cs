@@ -13,12 +13,14 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Team>> GetTeams(int userId)
+        public async Task<IEnumerable<Team>> Get(int leagueId)
         {
-            var query = "SELECT * FROM Team where userId = @userId";
+            var query = "SELECT t.* FROM " +
+                "Team t inner join League l on t.userId = l.userId" +
+                " where l.id = @leagueId";
             using (var connection = _context.CreateConnection())
             {
-                var teams = await connection.QueryAsync<Team>(query, new { userId });
+                var teams = await connection.QueryAsync<Team>(query, new { leagueId });
                 return teams.ToList();
             }
         }

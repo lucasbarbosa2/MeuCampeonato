@@ -1,24 +1,26 @@
-﻿using Domain.Interfaces;
+﻿using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MatchesController : ControllerBase
+    public class MatchesController : Controller
     {
-        private readonly IMatchRepository _matchRepository;
-        public MatchesController(IMatchRepository matchRepository)
+        private readonly IMatchService _matchService;        
+
+        public MatchesController(IMatchService matchService)
         {
-            _matchRepository = matchRepository;
+            _matchService = matchService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMatches(int userId)
+        public async Task<IActionResult> Get(int leagueId)
         {
             try
             {
-                var matches = await _matchRepository.GetMatches(userId);
+                var matches = await _matchService.Get(leagueId);
+
                 return Ok(matches);
             }
             catch (Exception ex)

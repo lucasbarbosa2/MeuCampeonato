@@ -13,7 +13,7 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Match>> GetMatches(int leagueId) {
+        public async Task<IEnumerable<Match>> Get(int leagueId) {
             var query = "SELECT * FROM Match where leagueId = @leagueId";
             using (var connection = _context.CreateConnection())
             {

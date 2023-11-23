@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
     public class League
     {
         public int Id { get; set; }
+        
+        public bool Finished { get; set; }
 
         [Required]
-        public string LeagueName { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public int LeagueFirstPlace { get; set; }
+        public int FirstPlace { get; set; }
 
         [Required]
-        public int LeagueSecondPlace { get; set; }
+        public int SecondPlace { get; set; }
 
         [Required]
-        public int LeagueThirdPlace {get; set; }
+        public int ThirdPlace {get; set; }
 
         [Required]
-        public int LeagueFourthPlace { get;set; }
+        public int FourthPlace { get;set; }
+
+        [Required]
+        public int UserId { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Domain.Interfaces;
+﻿using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
@@ -7,18 +7,18 @@ namespace WebUI.Controllers
     [ApiController]
     public class TeamsController : ControllerBase
     {
-        private readonly ITeamRepository _teamRepository;
-        public TeamsController(ITeamRepository teamRepository)
+        private readonly ITeamService _teamService;
+        public TeamsController(ITeamService teamService)
         {
-            _teamRepository = teamRepository;
+            _teamService = teamService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTeams(int userId)
+        public async Task<IActionResult> Get(int leagueId)
         {
             try
             {
-                var teams = await _teamRepository.GetTeams(userId);
+                var teams = await _teamService.Get(leagueId);
                 return Ok(teams);
             }
             catch (Exception ex)

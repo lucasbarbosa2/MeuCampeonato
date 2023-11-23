@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.DTO;
 
 namespace Application.Interfaces
 {
-    public class IMatchService
+    public interface IMatchService
     {
+        public Task<IEnumerable<MatchesDTO>> Get(int leagueId);
     }
 }

@@ -1,21 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Entities
+namespace Application.DTO
 {
-    public class Match
+    public class MatchesDTO
     {
         public int Id { get; set; }
 
-        [Required]
-        public int TeamOne{ get; set; }
+        public int TeamOne { get; set; }
 
-        [Required]
         public int TeamTwo { get; set; }
 
-        [Required]
+        public string TeamOneName { get; set; }
+
+        public string TeamTwoName { get; set; }
+
         public Int16 TeamOneScore { get; set; }
 
-        [Required]
         public Int16 TeamTwoScore { get; set; }
 
         public bool IsQuarter { get; set; }
@@ -26,7 +26,6 @@ namespace Domain.Entities
 
         public bool IsThird { get; set; }
 
-        [Required]
         public int LeagueId { get; set; }
     }
 }

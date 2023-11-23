@@ -1,0 +1,16 @@
+<h1 id="tableLabel">League</h1>
+
+<p *ngIf="!matches"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="matches">
+  <thead>
+    <tr>
+      <th>Match</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let match of matches">
+      <td>{{ match.teamOneName }} {{ match.teamOneScore }} x {{ match.teamTwoScore }} {{ match.teamTwoName }}</td>
+    </tr>
+  </tbody>
+</table>

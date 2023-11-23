@@ -1,4 +1,4 @@
-﻿using Domain.Interfaces;
+﻿using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
@@ -7,10 +7,10 @@ namespace WebUI.Controllers
     [ApiController]
     public class LeaguesController : Controller
     {
-        private readonly ILeagueRepository _leagueRepository;
-        public LeaguesController(ILeagueRepository leagueRepository)
+        private readonly ILeagueService _leagueService;
+        public LeaguesController(ILeagueService leagueService)
         {
-            _leagueRepository = leagueRepository;
+            _leagueService = leagueService;
         }
 
         [HttpGet]
@@ -18,7 +18,7 @@ namespace WebUI.Controllers
         {
             try
             {
-                var leagues = await _leagueRepository.GetLeagues(userId);
+                var leagues = await _leagueService.Get(userId);
                 return Ok(leagues);
             }
             catch (Exception ex)

@@ -4,6 +4,6 @@ namespace Domain.Interfaces
 {
     public interface IMatchRepository
     {
-        public Task<IEnumerable<Match>> GetMatches(int userId);
+        public Task<IEnumerable<Match>> Get(int leagueId);
     }
 }

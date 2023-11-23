@@ -4,6 +4,6 @@ namespace Domain.Interfaces
 {
     public interface ILeagueRepository
     {
-        public Task<IEnumerable<League>> GetLeagues(int userId);
+        public Task<IEnumerable<League>> Get(int userId);
     }
 }
